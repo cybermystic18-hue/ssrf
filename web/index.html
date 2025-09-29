@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DEVS legacy — Debug Tools</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Arial;margin:36px;background:#fff; color:#081225}
+    .card{max-width:880px;padding:20px;border-radius:12px;border:1px solid #e6eef9;box-shadow:0 8px 20px rgba(10,20,40,0.04)}
+    .muted{color:#6b7280}
+    .code{background:#f1f8ff;padding:6px 8px;border-radius:6px;font-family:monospace}
+    button{padding:8px 12px;border-radius:8px;border:1px solid #dbeafe;background:#e6f0ff;cursor:pointer}
+    input{padding:8px;border-radius:6px;border:1px solid #e6eef9;width:70%}
+  </style>
+</head>
+<body>
+  <h1>DEVS legacy — Debug Tools</h1>
+
+  <div class="card">
+    <p>This development environment includes a small server-side debug tool that helps devs fetch and preview remote content. It is not intended for production — be careful what URLs you paste in.</p>
+
+    <h3>Challenge</h3>
+    <p>Your goal: retrieve the administrator-only secret stored on the internal debug service. The secret is accessible from the server but is normally not reachable from the outside.</p>
+
+    <h3>Try it</h3>
+    <div>
+      <input id="url" placeholder="https://example.com/" value="https://example.com/">
+      <button id="btn">Fetch</button>
+    </div>
+
+    <p class="muted">Endpoint used by this tool: <span class="code">/api/fetch?url=&lt;URL&gt;</span></p>
+
+    <h3>Tip</h3>
+    <p class="muted">The public fetch tool blocks obvious hostnames like <code>localhost</code> and <code>127.0.0.1</code>. Sometimes there are clever alternate encodings that still resolve to internal hosts — inspect and experiment.</p>
+
+    <div id="out" style="margin-top:16px"></div>
+  </div>
+
+<script>
+  async function fetchURL(u) {
+    const out = document.getElementById('out');
+    out.innerHTML = '<pre>Loading…</pre>';
+    try {
+      const r = await fetch('/api/fetch?url=' + encodeURIComponent(u));
+      const j = await r.json();
+      out.innerHTML = '<pre>' + JSON.stringify(j, null, 2) + '</pre>';
+    } catch (e) {
+      out.innerHTML = '<pre>Failed: ' + e + '</pre>';
+    }
+  }
+
+  document.getElementById('btn').addEventListener('click', () => {
+    const v = document.getElementById('url').value;
+    fetchURL(v);
+  });
+</script>
+</body>
+</html>
