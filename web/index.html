@@ -19,19 +19,17 @@
   <div class="card">
     <p>This development environment includes a small server-side debug tool that helps devs fetch and preview remote content. It is not intended for production — be careful what URLs you paste in.</p>
 
-    <h3>Challenge</h3>
-    <p>Your goal: retrieve the administrator-only secret stored on the internal debug service. The secret is accessible from the server but is normally not reachable from the outside.</p>
-
+    
     <h3>Try it</h3>
     <div>
       <input id="url" placeholder="https://example.com/" value="https://example.com/">
       <button id="btn">Fetch</button>
     </div>
 
-    <p class="muted">Endpoint used by this tool: <span class="code">/api/fetch?url=&lt;URL&gt;</span></p>
+    
 
     <h3>Tip</h3>
-    <p class="muted">The public fetch tool blocks obvious hostnames like <code>localhost</code> and <code>127.0.0.1</code>. Sometimes there are clever alternate encodings that still resolve to internal hosts — inspect and experiment.</p>
+    <p class="muted">The public fetch tool blocks obvious hostnames , Sometimes there are clever alternate encodings that still resolve to internal hosts.</p>
 
     <div id="out" style="margin-top:16px"></div>
   </div>
