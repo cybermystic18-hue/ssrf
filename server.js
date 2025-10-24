@@ -25,7 +25,7 @@ const fs = require('fs');
 const morgan = require('morgan');
 const cors = require('cors');
 
-const FLAG = process.env.FLAG || 'ICTAK{ssrf_decimal_wrap}';
+const FLAG = process.env.FLAG || 'FLAG{ssrf_decimal_wrap}';
 const MAIN_PORT = process.env.PORT || 3000;
 const INTERNAL_PORT = 8000; // bound to localhost in internal service
 
